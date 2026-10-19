@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-dark: #141615;
+  --surface-dark: #1C201D;
+  --bg-light: #F6F5F0;
+  --surface-light: #EBEAE3;
+  --text-dark: #F6F5F0;
+  --text-light: #20231F;
+  --text-muted: #747970;
+  --accent-lime: #C6F277;
+  --border-dark: rgba(255, 255, 255, 0.08);
+  --border-light: #E2E0D8;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Subtle editorial paper grain & dot grid helpers */
+.editorial-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.light-editorial-grid {
+  background-image: 
+    linear-gradient(to right, rgba(32, 35, 31, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(32, 35, 31, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Print styling for /resume page */
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
+
+/* Accessible reduced motion override */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Selection */
+::selection {
+  background-color: #C6F277;
+  color: #141615;
+}
