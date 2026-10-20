@@ -12,42 +12,52 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      // Resume page is always white / light background
-      if (pathname === '/resume') {
-        setIsLightSection(true);
-        return;
-      }
+      if (ticking) return;
+      ticking = true;
 
-      // Dynamic project pages are dark background
-      if (pathname.startsWith('/projects/')) {
-        setIsLightSection(false);
-        return;
-      }
+      window.requestAnimationFrame(() => {
+        // Resume page is always white / light background
+        if (pathname === '/resume') {
+          setIsLightSection(true);
+          ticking = false;
+          return;
+        }
 
-      // On Homepage ('/'): check whether navbar is over light sections (#work, #about, #skills)
-      // or over dark sections (#hero, #contact)
-      const workEl = document.getElementById('work');
-      const contactEl = document.getElementById('contact');
+        // Dynamic project pages are dark background
+        if (pathname.startsWith('/projects/')) {
+          setIsLightSection(false);
+          ticking = false;
+          return;
+        }
 
-      if (workEl) {
-        const workRect = workEl.getBoundingClientRect();
-        const contactRect = contactEl?.getBoundingClientRect();
+        // On Homepage ('/'): check whether navbar is over light sections (#work, #about, #skills)
+        // or over dark sections (#hero, #contact)
+        const workEl = document.getElementById('work');
+        const contactEl = document.getElementById('contact');
 
-        // 90px accounts for top padding + navbar height
-        const reachedWork = workRect.top <= 90;
-        const reachedContact = contactRect ? contactRect.top <= 90 : false;
+        if (workEl) {
+          const workRect = workEl.getBoundingClientRect();
+          const contactRect = contactEl?.getBoundingClientRect();
 
-        // In light area when scrolled past top of work section and not yet reached dark contact footer
-        const isOverLight = reachedWork && !reachedContact;
-        setIsLightSection(isOverLight);
-      } else {
-        setIsLightSection(false);
-      }
+          // 90px accounts for top padding + navbar height
+          const reachedWork = workRect.top <= 90;
+          const reachedContact = contactRect ? contactRect.top <= 90 : false;
+
+          // In light area when scrolled past top of work section and not yet reached dark contact footer
+          const isOverLight = reachedWork && !reachedContact;
+          setIsLightSection(isOverLight);
+        } else {
+          setIsLightSection(false);
+        }
+        ticking = false;
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
+    window.addEventListener('resize', handleScroll, { passive: true });
     handleScroll();
     return () => {
       window.removeEventListener('scroll', handleScroll);

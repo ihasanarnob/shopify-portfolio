@@ -102,7 +102,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${sansFont.variable} ${handFont.variable} ${monoFont.variable} scroll-smooth`}>
+    <html lang="en" className={`${sansFont.variable} ${handFont.variable} ${monoFont.variable}`}>
       <head>
         <script
           type="application/ld+json"

@@ -29,7 +29,10 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
   };
 
   return (
-    <article className="group relative rounded-2xl bg-white border border-[#E2E0D8] overflow-hidden hover:border-[#20231F]/30 hover:shadow-xl hover:shadow-black/[0.04] transition-all duration-300">
+    <article
+      className="group relative rounded-2xl bg-white border border-[#E2E0D8] overflow-hidden hover:border-[#20231F]/30 hover:shadow-xl hover:shadow-black/[0.04] transition-all duration-300"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '0 550px' }}
+    >
       <div className={`grid grid-cols-1 lg:grid-cols-12 items-center gap-6 p-4 sm:p-6 lg:p-8 ${isEven ? '' : 'lg:flex-row-reverse'}`}>
         {/* Full Homepage Scroll Preview Window (7 cols) */}
         <div className={`lg:col-span-7 relative ${!isEven ? 'lg:order-2' : ''}`}>

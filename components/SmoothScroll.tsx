@@ -13,9 +13,16 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Check for prefers-reduced-motion
+    // Never hijack touch scroll on mobile devices or reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
+    const isTouchDevice =
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.innerWidth < 768;
+
+    if (prefersReducedMotion || isTouchDevice) {
+      // Mobile touch devices use native 120Hz GPU compositor momentum scroll
       return;
     }
 
@@ -26,7 +33,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 0.9,
-      touchMultiplier: 1.5,
+      touchMultiplier: 0,
     });
     lenisRef.current = lenis;
 
