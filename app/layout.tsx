@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import { Plus_Jakarta_Sans, JetBrains_Mono, Caveat } from 'next/font/google';
 import './globals.css';
 import SmoothScroll from '@/components/SmoothScroll';
 import { portfolioData } from '@/data/portfolio';
@@ -9,6 +9,13 @@ const sansFont = Plus_Jakarta_Sans({
   variable: '--font-sans',
   display: 'swap',
   weight: ['400', '500', '600', '700', '800'],
+});
+
+const handFont = Caveat({
+  subsets: ['latin'],
+  variable: '--font-hand',
+  display: 'swap',
+  weight: ['400', '600', '700'],
 });
 
 const monoFont = JetBrains_Mono({
@@ -95,7 +102,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${sansFont.variable} ${monoFont.variable} scroll-smooth`}>
+    <html lang="en" className={`${sansFont.variable} ${handFont.variable} ${monoFont.variable} scroll-smooth`}>
       <head>
         <script
           type="application/ld+json"

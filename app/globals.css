@@ -45,6 +45,24 @@ body {
   background-size: 48px 48px;
 }
 
+/* Apple Sticker Die-cut styling for Hero */
+.apple-sticker-frame {
+  box-shadow: 
+    0 20px 40px -10px rgba(0, 0, 0, 0.5),
+    0 4px 14px 0 rgba(0, 0, 0, 0.25),
+    0 0 0 5px #FFFFFF;
+  border-radius: 2rem;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+}
+
+.apple-sticker-frame:hover {
+  transform: scale(1.03) rotate(0deg) !important;
+  box-shadow: 
+    0 28px 55px -12px rgba(0, 0, 0, 0.6),
+    0 6px 20px 0 rgba(0, 0, 0, 0.3),
+    0 0 0 6px #C6F277;
+}
+
 /* Print styling for /resume page */
 @media print {
   body {

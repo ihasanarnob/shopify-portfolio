@@ -2,8 +2,9 @@
 
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import gsap from 'gsap';
-import { ArrowDown, FileText, Sparkles, Layers, ShoppingBag, Code, ArrowUpRight } from 'lucide-react';
+import { ArrowDown, FileText } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
 
 export default function Hero() {
@@ -12,7 +13,8 @@ export default function Hero() {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
-  const visualRef = useRef<HTMLDivElement>(null);
+  const stickerRef = useRef<HTMLDivElement>(null);
+  const noteRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -46,10 +48,16 @@ export default function Hero() {
           '-=0.5'
         )
         .fromTo(
-          visualRef.current,
-          { opacity: 0, y: 40, scale: 0.98 },
-          { opacity: 1, y: 0, scale: 1, duration: 1.1 },
-          '-=0.6'
+          stickerRef.current,
+          { opacity: 0, scale: 0.9, rotate: -6 },
+          { opacity: 1, scale: 1, rotate: -2, duration: 1.1, ease: 'back.out(1.4)' },
+          '-=0.7'
+        )
+        .fromTo(
+          noteRef.current,
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.8 },
+          '-=0.5'
         )
         .fromTo(
           scrollIndicatorRef.current,
@@ -80,8 +88,9 @@ export default function Hero() {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] lg:w-[900px] h-[350px] bg-[#C6F277]/[0.035] blur-[140px] rounded-full pointer-events-none" />
 
       {/* Hero Content Container */}
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 w-full relative z-10">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 w-full relative z-10 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
           {/* Left Column: Typography & CTAs (7 cols) */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             {/* Availability Badge */}
@@ -96,13 +105,31 @@ export default function Hero() {
               <span>{portfolioData.personal.location} &middot; Open to opportunities</span>
             </div>
 
-            {/* Oversized Headline */}
+            {/* Oversized Headline with Hand-Drawn Underline */}
             <h1
               ref={headlineRef}
               className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#F6F5F0] leading-[1.08] max-w-2xl"
             >
-              I build Shopify experiences that make brands{' '}
-              <span className="text-[#C6F277] font-serif italic font-normal">stand out.</span>
+              Shopify storefronts that{' '}
+              <span className="relative inline-block text-[#C6F277] whitespace-nowrap">
+                keep getting better.
+                {/* Hand-drawn SVG pen underline in accentLime */}
+                <svg
+                  className="absolute -bottom-2 sm:-bottom-3.5 left-0 w-full h-4 sm:h-6 text-[#C6F277] pointer-events-none overflow-visible"
+                  viewBox="0 0 280 28"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M4 18 C 60 6, 180 4, 276 14 C 200 24, 70 22, 18 24"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
             </h1>
 
             {/* Supporting Copy */}
@@ -153,92 +180,73 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Storefront Architecture Window (5 cols) */}
-          <div ref={visualRef} className="lg:col-span-5 relative mt-4 lg:mt-0">
-            {/* Subtle glow border */}
-            <div className="rounded-2xl border border-white/[0.1] bg-[#1C201D] shadow-2xl p-5 sm:p-6 relative overflow-hidden backdrop-blur-md">
-              {/* Top macOS Browser Window Bar */}
-              <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444]/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]/80" />
-                  <span className="text-xs font-mono text-[#747970] ml-2">
-                    storefront-architecture.liquid
-                  </span>
-                </div>
-                <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-white/[0.04] text-[#C6F277] border border-white/[0.06]">
-                  <ShoppingBag className="w-3 h-3 text-[#C6F277]" />
-                  <span>Shopify OS 2.0</span>
-                </div>
-              </div>
+          {/* Right Column: The Apple Sticker Memoji / Cutout Feature (5 cols) */}
+          <div className="lg:col-span-5 relative flex flex-col items-center lg:items-end justify-center mt-6 lg:mt-0">
+            <div className="relative max-w-sm sm:max-w-md w-full flex flex-col items-center">
+              
+              {/* The Apple Sticker Die-cut Frame */}
+              <div
+                ref={stickerRef}
+                className="apple-sticker-frame relative w-64 h-64 sm:w-80 sm:h-80 rounded-[2.5rem] bg-[#1C201D] overflow-hidden border-4 border-white cursor-pointer select-none -rotate-2"
+              >
+                {/* Image Cutout */}
+                <Image
+                  src="/avatar.jpg"
+                  alt={`${portfolioData.personal.name} Memoji Portrait`}
+                  width={640}
+                  height={640}
+                  priority
+                  className="w-full h-full object-cover object-top"
+                />
 
-              {/* Code & Architectural Visual Stack */}
-              <div className="space-y-4 font-mono text-xs">
-                {/* Code Snippet Block */}
-                <div className="bg-[#141615] rounded-xl p-4 border border-white/[0.06] text-slate-300 leading-relaxed text-[11px]">
-                  <p className="text-[#747970]">// Modular Liquid Section Component</p>
-                  <p>
-                    <span className="text-[#C6F277]">{'{%'}</span> schema <span className="text-[#C6F277]">{'%}'}</span>
-                  </p>
-                  <p className="pl-3 text-slate-400">
-                    &quot;name&quot;: &quot;Featured Product Showcase&quot;,
-                  </p>
-                  <p className="pl-3 text-slate-400">
-                    &quot;class&quot;: &quot;shopify-section--editorial&quot;,
-                  </p>
-                  <p className="pl-3 text-slate-400">
-                    &quot;settings&quot;: [
-                  </p>
-                  <p className="pl-6 text-[#C6F277]">
-                    &#123; &quot;type&quot;: &quot;product&quot;, &quot;id&quot;: &quot;featured&quot; &#125;,
-                  </p>
-                  <p className="pl-6 text-slate-400">
-                    &#123; &quot;type&quot;: &quot;select&quot;, &quot;id&quot;: &quot;layout_mode&quot; &#125;
-                  </p>
-                  <p className="pl-3 text-slate-400">]</p>
-                  <p>
-                    <span className="text-[#C6F277]">{'{%'}</span> endschema <span className="text-[#C6F277]">{'%}'}</span>
-                  </p>
-                </div>
+                {/* Sticker Sheen Reflection Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/25 pointer-events-none" />
 
-                {/* Live Section Breakdown Pills */}
-                <div className="space-y-2 pt-2">
-                  <div className="flex items-center justify-between p-3 rounded-lg bg-white/[0.03] border border-white/[0.06] text-xs">
-                    <div className="flex items-center gap-2.5">
-                      <Layers className="w-4 h-4 text-[#C6F277]" />
-                      <span className="text-white font-medium">Reusable Theme Sections</span>
-                    </div>
-                    <span className="text-[10px] text-[#A0A49E] font-mono">Drag &amp; Drop</span>
-                  </div>
-
-                  <div className="flex items-center justify-between p-3 rounded-lg bg-white/[0.03] border border-white/[0.06] text-xs">
-                    <div className="flex items-center gap-2.5">
-                      <Code className="w-4 h-4 text-cyan-400" />
-                      <span className="text-white font-medium">Clean JavaScript &amp; Liquid</span>
-                    </div>
-                    <span className="text-[10px] text-[#A0A49E] font-mono">Zero Bloat</span>
-                  </div>
-
-                  <div className="flex items-center justify-between p-3 rounded-lg bg-white/[0.03] border border-white/[0.06] text-xs">
-                    <div className="flex items-center gap-2.5">
-                      <Sparkles className="w-4 h-4 text-violet-400" />
-                      <span className="text-white font-medium">Figma to Pixel-Perfect Theme</span>
-                    </div>
-                    <span className="text-[10px] text-[#A0A49E] font-mono">100% Fidelity</span>
-                  </div>
-                </div>
-
-                {/* Status bar */}
-                <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-[10px] text-[#747970]">
-                  <span>Environment: Production Ready</span>
-                  <span className="text-[#C6F277] flex items-center gap-1">
-                    UAT Passed &check;
-                  </span>
+                {/* Verified Sticker Badge */}
+                <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-[#141615]/90 text-white text-[10px] font-mono font-bold tracking-wider uppercase border border-white/20 shadow-md flex items-center gap-1.5 backdrop-blur-sm">
+                  <span className="w-2 h-2 rounded-full bg-[#C6F277]" />
+                  <span>Shopify Expert</span>
                 </div>
               </div>
+
+              {/* Hand-Drawn Annotation & Curved Arrow Pointing to Sticker */}
+              <div ref={noteRef} className="relative mt-6 sm:mt-8 w-full max-w-xs flex flex-col items-center text-center">
+                {/* SVG Curved Arrow pointing up to the sticker */}
+                <svg
+                  className="w-24 h-12 text-[#C6F277] mb-1 -rotate-6"
+                  viewBox="0 0 100 50"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20 45 C 50 40, 80 30, 85 8"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeDasharray="4 2"
+                  />
+                  <path
+                    d="M75 12 L 85 8 L 88 18"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+
+                {/* Handwritten Note in Caveat */}
+                <p className="font-hand text-2xl sm:text-3xl text-[#C6F277] font-bold leading-tight rotate-[-2deg]">
+                  that&apos;s me! I&apos;ll be the one actually writing the Liquid &amp; building your store
+                </p>
+
+                <p className="font-mono text-[11px] text-[#A0A49E] uppercase tracking-widest mt-2">
+                  No agencies &middot; No juniors &middot; Just clean code
+                </p>
+              </div>
+
             </div>
           </div>
+
         </div>
       </div>
 
