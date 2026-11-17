@@ -32,7 +32,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://iftekharhasan.dev'),
+  metadataBase: new URL('https://iftekhar-hasan.netlify.app'),
   title: `${portfolioData.personal.name} | ${portfolioData.personal.role}`,
   description: `${portfolioData.personal.name} is a Shopify & Frontend Developer based in Bangladesh, focused on custom theme engineering, Online Store 2.0 architecture, and responsive e-commerce storefronts.`,
   keywords: [
@@ -52,13 +52,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://iftekharhasan.dev',
+    url: 'https://iftekhar-hasan.netlify.app',
     title: `${portfolioData.personal.name} | ${portfolioData.personal.role}`,
     description: portfolioData.personal.subheadline,
     siteName: `${portfolioData.personal.name} Portfolio`,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&h=630&q=85',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: `${portfolioData.personal.name} — Shopify & Frontend Developer Portfolio`,
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${portfolioData.personal.name} | ${portfolioData.personal.role}`,
     description: portfolioData.personal.subheadline,
-    images: ['https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&h=630&q=85'],
+    images: ['/og-image.jpg'],
   },
   icons: {
     icon: '/favicon.svg',
@@ -86,7 +86,7 @@ export default function RootLayout({
     '@type': 'Person',
     name: portfolioData.personal.fullName,
     jobTitle: portfolioData.personal.role,
-    url: 'https://iftekharhasan.dev',
+    url: 'https://iftekhar-hasan.netlify.app',
     sameAs: [portfolioData.personal.linkedin, portfolioData.personal.github],
     knowsAbout: [
       'Shopify Theme Development',
