@@ -58,9 +58,10 @@ export const metadata: Metadata = {
     siteName: `${portfolioData.personal.name} Portfolio`,
     images: [
       {
-        url: '/og-image.jpg',
+        url: 'https://iftekhar-hasan.netlify.app/og-image.jpg',
         width: 1200,
         height: 630,
+        type: 'image/jpeg',
         alt: `${portfolioData.personal.name} — Shopify & Frontend Developer Portfolio`,
       },
     ],
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${portfolioData.personal.name} | ${portfolioData.personal.role}`,
     description: portfolioData.personal.subheadline,
-    images: ['/og-image.jpg'],
+    images: ['https://iftekhar-hasan.netlify.app/og-image.jpg'],
   },
   icons: {
     icon: '/favicon.svg',
